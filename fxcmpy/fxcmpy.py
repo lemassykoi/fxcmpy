@@ -1086,11 +1086,9 @@ class fxcmpy(object):
                  }
 
         meth = 'trading/change_trade_stop_limit'
-        self.__handle_request__(method=meth, params=params,
-                                protocol='post')
+        self.__handle_request__(method=meth, params=params, protocol='post')
 
-    def close_trade(self, trade_id, amount, order_type='AtMarket',
-                    time_in_force='IOC', rate=0, at_market=0):
+    def close_trade(self, trade_id, amount, order_type='AtMarket', time_in_force='IOC', rate=0, at_market=0):
         """ Close a given trade.
 
         Arguments:
@@ -1152,11 +1150,9 @@ class fxcmpy(object):
                   'time_in_force': time_in_force
                  }
 
-        self.__handle_request__(method='trading/close_trade',
-                                       params=params, protocol='post')
+        self.__handle_request__(method='trading/close_trade', params=params, protocol='post')
 
-    def change_order(self, order_id, amount, rate, order_range=0,
-                     trailing_step=None):
+    def change_order(self, order_id, amount, rate, order_range=0, trailing_step=None):
         """ Change amount, rate, order_range and / or trailling_step of an
         order.
 
@@ -1282,8 +1278,7 @@ class fxcmpy(object):
         except:
             raise TypeError('amount must be an integer.')
 
-        order = self.open_trade(symbol, True, amount, 'FOK', 'AtMarket',
-                                account_id)
+        order = self.open_trade(symbol, True, amount, 'FOK', 'AtMarket', account_id)
 
         return order
 
@@ -1461,7 +1456,8 @@ class fxcmpy(object):
 
         else:
             self.logger.warn('Missing orderId in servers answer.')
-            return 0
+            raise ValueError('Missing orderId in servers answer.')
+            return 1
 
         try:
             order = self.get_order(order_id)
